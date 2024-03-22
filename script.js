@@ -1,4 +1,4 @@
-const apiKey = 'b1b9b3f722734b429bf121953242203';
+const apiKey = 'MY_API_KEY';
 
 const months = ['Jan', 'Fév', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Déc'];
 const daysOfWeek = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
