@@ -162,7 +162,7 @@ body {
 	background: rgb(207, 141, 207);
 }
 
-.week-list>li {
+.week-list>li:not(.clear) {
 	float: left;
 	padding: 15px;
 	cursor: pointer;
