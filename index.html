@@ -14,13 +14,18 @@
     <main>
 
         <div class="container">
-            <div class="weather-side">
+            <div class="weather-side" title="Details sur la meteo">
                 <div class="weather-gradient"></div>
                 <div class="date-container">
-                    <h2 class="date-dayname">Inconnu</h2><span class="date-day">-- -- 20--</span><i
-                        class="location-icon" data-feather="map-pin"></i><span class="location">Inconnu</span>
+                    <h2 class="date-dayname">Inconnu</h2><span class="date-day">-- -- 20--</span><span
+                        class="location"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                            viewBox="0 0 24 24" fill="currentColor" stroke="#f00" stroke-width="0.5"
+                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                            <circle cx="12" cy="10" r="3" />
+                        </svg>Inconnu</span>
                 </div>
-                <div class="weather-container"><img src="" class="image-conditions-meteo" alt="Conditions meteo"/>
+                <div class="weather-container"><img src="" class="image-conditions-meteo" alt="Conditions meteo" />
                     <h1 class="weather-temp">--°C</h1>
                     <h3 class="weather-desc">Inconnu</h3>
                 </div>
@@ -42,20 +47,19 @@
                 </div>
                 <div class="week-container">
                     <ul class="week-list">
-                        <li class="day-select active"><img src="" alt=""><span
-                                class="day-name">---</span><span class="day-temp">--°C</span></li>
+                        <li class="day-select active"><img src="" alt=""><span class="day-name">---</span><span
+                                class="day-temp" title="Temperature moyenne">--°C</span></li>
                         <li class="day-select"><img src="" alt=""><span class="day-name">---</span><span
-                                class="day-temp">--°C</span></li>
+                                class="day-temp" title="Temperature moyenne">--°C</span></li>
                         <li class="day-select"><img src="" alt=""></i><span class="day-name">---</span><span
-                                class="day-temp">--°C</span></li>
+                                class="day-temp" title="Temperature moyenne">--°C</span></li>
                         <li class="day-select"><img src="" alt=""><span class="day-name">---</span><span
-                                class="day-temp">--°C</span></li>
-                        <li class="clear"></>
+                                class="day-temp" title="Temperature moyenne">--°C</span></li>
+                        <li class="clear">
+                            </>
                     </ul>
                 </div>
-                <!-- <div class="location-container">
-                    <button class="location-button"> <i data-feather="map-pin"></i><span>changer de lieu</span></button>
-                </div> -->
+
             </div>
         </div>
     </main>

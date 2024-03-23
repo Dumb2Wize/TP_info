@@ -2,7 +2,7 @@
 
 
 :root {
-	--gradient: linear-gradient( 135deg, #72f27d 10%, #0992aa 100%);
+	--gradient: linear-gradient( 135deg, #410000 10%, #6d4a00 100%);
 }
 
 * {
@@ -60,6 +60,7 @@ body {
 	-webkit-transform: translateZ(0) scale(1.02) perspective(1000px);
 	        transform: translateZ(0) scale(1.02) perspective(1000px);
 	float: left;
+	color:rgb(255, 248, 190);
 }
 
 .weather-side:hover {
@@ -75,7 +76,7 @@ body {
 	left: 0;
 	background-image: var(--gradient);
 	border-radius: 25px;
-	opacity: 0.55;
+	opacity: 0.5;
 }
 
 .date-container {
@@ -135,7 +136,7 @@ body {
 .today-info {
 	padding: 15px;
 	margin: 0 25px 25px 25px;
-/* 	box-shadow: 0 0 50px -5px rgba(0, 0, 0, 0.25); */
+	box-shadow: 0 0 50px -5px rgba(0, 0, 0, 0.25);
 	border-radius: 10px;
 }
 
@@ -252,9 +253,13 @@ body {
 	}
 	.container{
 		background-color: #222831;
-		color:antiquewhite;
+		color:rgb(243, 236, 176);
 	}
+	
 	.week-list{
 		background-color: #404d61;
+	}
+	.today-info{
+		box-shadow: 0 0 50px -5px rgba(0, 0, 0, 0.5);
 	}
 }

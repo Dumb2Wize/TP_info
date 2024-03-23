@@ -1,4 +1,4 @@
-const apiKey = 'MY_API_KEY';
+const apiKey = 'API_KEY';
 
 const months = ['Jan', 'Fév', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Déc'];
 const daysOfWeek = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
@@ -19,17 +19,18 @@ async function getWeather(date, currentLocation) {
             const response = await fetch(apiUrl);
             const data = await response.json();
             const precip_mm = data.current.precip_mm;
-            // Valeur de référence pour les précipitations fortes
-            const referenceValue = 10; // 10 mm
-            // Calcul du pourcentage de précipitations
-            const pourcentagePrecipitation = (precip_mm / referenceValue) * 100;
 
-            document.querySelector(".location").innerHTML = `${data.location.name}, ${data.location.country}`
+            document.querySelector(".location").innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                            viewBox="0 0 24 24" fill="currentColor" stroke="#f00" stroke-width="0.5"
+                                                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin">
+                                                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                                            <circle cx="12" cy="10" r="3" />
+        </svg> ${data.location.name}, ${data.location.country}`
             document.querySelector(".weather-temp").innerHTML = ` ${data.current.temp_c} °C`
             document.querySelector(".weather-desc").innerHTML = `${data.current.condition.text}`
-            document.querySelector(".precipitation .value").innerHTML = `${pourcentagePrecipitation.toFixed(1)} %`
+            document.querySelector(".precipitation .value").innerHTML = `${precip_mm} mm`
             document.querySelector(".humidity .value").innerHTML = `${data.current.humidity} %`
-            document.querySelector(".wind .value").innerHTML = `${data.current.wind_kph} %`
+            document.querySelector(".wind .value").innerHTML = `${data.current.wind_kph} km/h`
             document.querySelector(".image-conditions-meteo").setAttribute("src", `${data.current.condition.icon}`)
 
         } catch (error) {
@@ -48,21 +49,18 @@ async function getWeather(date, currentLocation) {
             if (xhr.status == 200) {
                 try {
 
-                    
+
 
                     let response = JSON.parse(xhr.response)
 
                     const precip_mm = response.forecast.forecastday[0].day.totalprecip_mm;
-                    // Valeur de référence pour les précipitations fortes
-                    const referenceValue = 10; // 10 mm
-                    // Calcul du pourcentage de précipitations
-                    const pourcentagePrecipitation = (precip_mm / referenceValue) * 100;
+                    
 
                     document.querySelector(".weather-temp").innerHTML = ` ${response.forecast.forecastday[0].day.avgtemp_c} °C`
                     document.querySelector(".weather-desc").innerHTML = `${response.forecast.forecastday[0].day.condition.text}`
-                    document.querySelector(".precipitation .value").innerHTML = `${pourcentagePrecipitation.toFixed(1)} %`
+                    document.querySelector(".precipitation .value").innerHTML = `${precip_mm} mm`
                     document.querySelector(".humidity .value").innerHTML = `${response.forecast.forecastday[0].day.avghumidity} %`
-                    document.querySelector(".wind .value").innerHTML = `${response.forecast.forecastday[0].day.maxwind_kph} %`
+                    document.querySelector(".wind .value").innerHTML = `${response.forecast.forecastday[0].day.maxwind_kph} km/h`
                     document.querySelector(".image-conditions-meteo").setAttribute("src", `${response.forecast.forecastday[0].day.condition.icon}`)
                 } catch (error) {
                     console.error('Erreur lors de la récupération des données météorologiques:', error);
@@ -98,11 +96,10 @@ async function getTempForDate(date, currentLocation, i = 0) {
             if (xhr.status == 200) {
                 try {
                     let response = JSON.parse(xhr.response)
-                    // Récupérez les informations météorologiques pour demain
+
                     console.log(response)
 
-                    // const c = { ,
-                    //             icon: response.forecast.forecastday[0].day.condition.icon, }
+                    
 
                     if (i == 0) {
                         resolve(response.forecast.forecastday[0].day.avgtemp_c); // Température moyenne pour la date d
