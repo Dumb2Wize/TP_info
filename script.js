@@ -1,19 +1,30 @@
-const apiKey = 'API_KEY';
+const apiKey = 'ba4fc978ebe447dfb55192809242203';
 
-const months = ['Jan', 'Fév', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Déc'];
-const daysOfWeek = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
 const today = new Date()
 
 let weekList = document.querySelectorAll(".week-list .day-select")
-let formatLan = "fr"
+let formatLan = document.documentElement.lang || 'fr'
 let currentLocation = "Kinshasa"
 
-async function getWeather(date, currentLocation) {
-    document.querySelector(".date-dayname").innerHTML = `${daysOfWeek[date.getDay()]}`
-    document.querySelector(".date-day").innerHTML = `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`
+
+function getDayName(date) {
+    let result = date.toLocaleDateString(formatLan, { weekday: 'long' })
+    result = result[0].toUpperCase() + result.substring(1)
+    return result
+}
+function getMonthName(date) {
+    let result = date.toLocaleDateString(formatLan, { month: 'long' })
+    result = result[0].toUpperCase() + result.substring(1)
+    return result
+}
+
+async function getWeather(date, location) {
+
+    document.querySelector(".date-dayname").innerHTML = `${getDayName(date)}`
+    document.querySelector(".date-day").innerHTML = `${date.getDate()} ${getMonthName(date)} ${date.getFullYear()}`
 
     if (date.getDate() == today.getDate()) {
-        const apiUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${currentLocation}&lang=${formatLan}`;
+        const apiUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}&lang=${formatLan}`;
 
         try {
             const response = await fetch(apiUrl);
@@ -41,7 +52,7 @@ async function getWeather(date, currentLocation) {
 
         // Formatez la date de demain pour qu'elle corresponde au format utilisé par l'API WeatherAPI (YYYY-MM-DD)
         const formattedDate = date.toISOString().split('T')[0];
-        const apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${currentLocation}&lang=${formatLan}&dt=${formattedDate}`;
+        const apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&lang=${formatLan}&dt=${formattedDate}`;
         let xhr = new XMLHttpRequest()
         xhr.open('get', apiUrl, true)
         xhr.send()
@@ -54,7 +65,7 @@ async function getWeather(date, currentLocation) {
                     let response = JSON.parse(xhr.response)
 
                     const precip_mm = response.forecast.forecastday[0].day.totalprecip_mm;
-                    
+
 
                     document.querySelector(".weather-temp").innerHTML = ` ${response.forecast.forecastday[0].day.avgtemp_c} °C`
                     document.querySelector(".weather-desc").innerHTML = `${response.forecast.forecastday[0].day.condition.text}`
@@ -76,7 +87,7 @@ async function getWeather(date, currentLocation) {
     }
 }
 
-async function getTempForDate(date, currentLocation, i = 0) {
+async function getTempForDate(date, location, i = 0) {
 
     // Formatez la date de demain pour qu'elle corresponde au format utilisé par l'API WeatherAPI (YYYY-MM-DD)
     const year = date.getFullYear(); // Obtenez l'année à quatre chiffres
@@ -86,7 +97,7 @@ async function getTempForDate(date, currentLocation, i = 0) {
     // Formatez la date dans le format "aaaa-mm-jj"
     const formattedDate = `${year}-${month}-${day}`;
 
-    const apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${currentLocation}&dt=${formattedDate}`;
+    const apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&dt=${formattedDate}`;
     console.log(apiUrl);
     const result = await new Promise((resolve, reject) => {
         let xhr = new XMLHttpRequest()
@@ -96,10 +107,6 @@ async function getTempForDate(date, currentLocation, i = 0) {
             if (xhr.status == 200) {
                 try {
                     let response = JSON.parse(xhr.response)
-
-                    console.log(response)
-
-                    
 
                     if (i == 0) {
                         resolve(response.forecast.forecastday[0].day.avgtemp_c); // Température moyenne pour la date d
@@ -122,8 +129,8 @@ async function getTempForDate(date, currentLocation, i = 0) {
 }
 
 
-async function displayTemperature(date, element, i = 0) {
-    const temp = await getTempForDate(date, "Kinshasa", i)
+async function displayTemperature(date, element, location, i = 0) {
+    const temp = await getTempForDate(date, location, i)
     if (i == 0) {
         element.innerHTML = `${temp} °C`
     }
@@ -132,21 +139,24 @@ async function displayTemperature(date, element, i = 0) {
     }
 }
 
-let i = 0
-weekList.forEach(dayOfWeek => {
-    let timeStamp = Date.now() + (i * 1000 * 60 * 60 * 24)
-    let currentDate = new Date(timeStamp)
-    console.log(currentDate)
-    dayOfWeek.querySelector(".day-name").innerHTML = `${daysOfWeek[currentDate.getDay()]}`.substring(0, 3)
-    displayTemperature(currentDate, dayOfWeek.querySelector(".day-temp"))
-    displayTemperature(currentDate, dayOfWeek.querySelector("img"), 1)
+function loadLocation(location) {
+    getWeather(today, location)
+    let i = 0
+    weekList.forEach(dayOfWeek => {
+        let timeStamp = Date.now() + (i * 1000 * 60 * 60 * 24)
+        let currentDate = new Date(timeStamp)
+        console.log(currentDate)
+        dayOfWeek.querySelector(".day-name").innerHTML = `${getDayName(currentDate)}`.substring(0, 3)
+        displayTemperature(currentDate, dayOfWeek.querySelector(".day-temp"), location)
+        displayTemperature(currentDate, dayOfWeek.querySelector("img"), location, 1)
 
-    dayOfWeek.addEventListener("click", () => {
-        document.querySelector(".active").classList.toggle("active")
-        dayOfWeek.classList.toggle("active")
-        getWeather(currentDate, currentLocation)
+        dayOfWeek.addEventListener("click", () => {
+            document.querySelector(".active").classList.toggle("active")
+            dayOfWeek.classList.toggle("active")
+            getWeather(currentDate, location)
+        })
+        i++
     })
-    i++
-})
+}
 
-window.onload = getWeather(today, "Kinshasa")
+window.onload = loadLocation(currentLocation)

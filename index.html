@@ -6,13 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="favicon.svg" type="image/x-icon">
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="search-location.css">
     <script src="script.js" defer></script>
+    <script src="search.js" defer></script>
     <title>Weater</title>
 </head>
 
 <body>
     <main>
-
+        <div class="search-location">
+            <input type="search" placeholder="Rechercher un lieu" class="unactive" spellcheck="false">
+            <div class="suggestions"></div>
+        </div>
         <div class="container">
             <div class="weather-side" title="Details sur la meteo">
                 <div class="weather-gradient"></div>
@@ -40,7 +45,7 @@
                         <div class="humidity"> <span class="title">HUMIDITE</span><span class="value">34 %</span>
                             <div class="clear"></div>
                         </div>
-                        <div class="wind"> <span class="title">WIND</span><span class="value">0 km/h</span>
+                        <div class="wind"> <span class="title">VENT</span><span class="value">0 km/h</span>
                             <div class="clear"></div>
                         </div>
                     </div>
@@ -62,6 +67,7 @@
 
             </div>
         </div>
+        
     </main>
 </body>
 
