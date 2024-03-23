@@ -1,4 +1,4 @@
-const apiKey = 'API_KEY';
+const apiKey = '9de34b06ddf5451e8f2200002242303';
 
 const today = new Date()
 
