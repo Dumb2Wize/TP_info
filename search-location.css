@@ -18,11 +18,12 @@
     font-size: 1.4em;
     background-color: rgba(52, 119, 219, 0.25);
     outline: none;
-    border: 1px solid gray;
+    border: 1px solid rgba(0, 83, 151, 0.25);
     border-radius: 15px;
     padding: 20px;
     text-align: left;
     text-decoration: none;
+    box-shadow: 0 0 50px -5px rgba(0, 0, 0, 0.5);
 }
 .search-location input.unactive{
     text-align: center;
