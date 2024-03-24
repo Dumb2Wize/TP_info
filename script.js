@@ -4,7 +4,14 @@ const today = new Date()
 
 let weekList = document.querySelectorAll(".week-list .day-select")
 let formatLan = document.documentElement.lang || 'fr'
-let currentLocation = "Kinshasa"
+let currentLocation
+if(localStorage.getItem("location"))
+{
+    currentLocation = localStorage.getItem("location")
+}else {
+    currentLocation = "Kinshasa"
+}
+
 
 
 function getDayName(date) {
@@ -20,7 +27,7 @@ function getMonthName(date) {
 
 async function getWeather(date, location) {
 
-
+    localStorage.setItem("location", location)
     document.querySelector(".date-dayname").innerHTML = `${getDayName(date)}`
     document.querySelector(".date-day").innerHTML = `${date.getDate()} ${getMonthName(date)} ${date.getFullYear()}`
 
