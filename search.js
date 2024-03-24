@@ -18,7 +18,6 @@ userSearch.addEventListener("input", () => {
     if (userSearch.value.trim() === "") {
         suggestions.innerHTML = ``
         suggestions.style.visibility = "hidden";
-        userSearch.classList.add("unactive")
         return
     }
 
@@ -38,7 +37,6 @@ userSearch.addEventListener("input", () => {
                         suggestions.innerHTML = ``
                         suggestions.style.visibility = "hidden";
                         userSearch.value = ''
-                        userSearch.classList.add("unactive")
                     })
 
                 });
@@ -51,7 +49,6 @@ userSearch.addEventListener("input", () => {
                 suggestions.style.color = "red"
 
             }
-            userSearch.classList.remove("unactive")
 
         })
         .catch(error => {
