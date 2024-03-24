@@ -11,15 +11,21 @@
 
 * {
 	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 
 body {
-	display: block;
+	display: flex;
+	position: relative;
+	width: 100vw;
+	justify-content: center;
 	/* overflow: hidden; */
 }
 
 .main {
+	position: absolute;
 	font-family: 'Montserrat', sans-serif;
 	background-color: #d1f6ff;
 	height: 100vh;
@@ -205,7 +211,7 @@ body {
 @media screen and (max-width: 760px) {
 
 	body {
-		overflow-y: scroll;
+		min-height: 100vh;
 	}
 
 	.main {
