@@ -16,9 +16,7 @@
 
 body {
 	display: block;
-	width: 110%;
-	height: 110%;
-	overflow: hidden;
+	/* overflow: hidden; */
 }
 
 .main {
@@ -249,7 +247,8 @@ body {
 		background: none;
 		justify-content: space-between;
 		margin: 0 5px;
-		overflow-x: scroll;
+		overflow-x: auto;
+		overflow-y: hidden;
 	}
 
 	.info-side {
