@@ -15,7 +15,7 @@ async function searchRegions(query) {
 
 
 userSearch.addEventListener("input", () => {
-    if (userSearch.value === "") {
+    if (userSearch.value.trim() === "") {
         suggestions.innerHTML = ``
         suggestions.style.visibility = "hidden";
         userSearch.classList.add("unactive")
