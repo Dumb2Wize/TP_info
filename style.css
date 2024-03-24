@@ -7,26 +7,37 @@
 .clear {
 	clear: both;
 }
+html{
+	padding: 0;
+}
 
-*{
+* {
 	margin: 0;
 }
 
+
 body {
+	display: block;
+	width: 110%;
+	height: 110%;
+}
+
+.main {
 	font-family: 'Montserrat', sans-serif;
 	background-color: #d1f6ff;
 	height: 100vh;
+	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin: 0;
-	/* overflow: hidden; */
+	padding: 0;
+	overflow: hidden;
 }
 
 .container {
 	border-radius: 25px;
 	color: #000;
-	height: 400px;
+	height: 380px;
 }
 
 .weather-side {
@@ -133,13 +144,12 @@ body {
 	float: left;
 	padding: 15px;
 	cursor: pointer;
-	-webkit-transition: 200ms ease;
-	-o-transition: 200ms ease;
 	transition: 200ms ease;
 	border-radius: 10px;
 }
 
-.week-list>li:hover, .week-list>li.active:hover {
+.week-list>li:hover,
+.week-list>li.active:hover {
 
 	transform: scale(1.1);
 	background: #e88aff;
@@ -173,8 +183,10 @@ body {
 	font-weight: 700;
 }
 
+
+
 @media (prefers-color-scheme:dark) {
-	body {
+	.main {
 		background-color: #343d4b;
 	}
 
@@ -194,48 +206,102 @@ body {
 }
 
 @media screen and (max-width: 760px) {
-	body{
-		display: flex;
+
+	body {
 		overflow-y: scroll;
+	}
+
+	.main {
+		display: flex;
 		align-items: center;
 		justify-content: center;
-		background-color: #04a3ec;
-		padding: 10px;
+		padding: 10px 10px 50px;
+		height: 100%;
 	}
-	
-	.container{
+
+	.container {
 		display: flex;
 		flex-direction: column;
 		background-color: none;
-		height: 100%;
+
 		align-items: center;
-		
-		padding-top: 200px;
+
+		margin-top: 400px;
 	}
-	.weather-side{
-		height: 400px;
+
+	.date-container {
+		min-height: 100px;
 	}
-	.week-list{
+
+	.weather-side {
+		margin-top: 10px;
+		position: absolute;
+		height: 40vw;
+		width: 40vw;
+		min-height: 380px;
+		min-width: 300px;
+		top: 80px;
+		z-index: 8;
+		border-radius: 35px;
+	}
+
+	.week-list {
 		display: flex;
 		background: none;
-		justify-content: center;
+		justify-content: space-between;
 		margin: 0 5px;
+		overflow-x: scroll;
 	}
-	.info-side{
+
+	.info-side {
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 		/* margin: 0 0 60px; */
-		
+		margin-top: 60px;
+		height: 45vh;
 		width: 90vw;
 		max-width: 450px;
 		background-color: none;
 	}
 
-	.week-list{
-		width: 80%;
-		
-		margin: 40px;
+
+	.weather-container {
+		position: relative;
+		margin-top: 150px;
+		border-radius: 35px;
+
+	}
+
+	.weather-gradient {
+		border-radius: 35px;
+	}
+
+	.week-container{
+		box-shadow: none;
 	}
 	
+
+}
+
+@media screen and(max-width: 430px) {
+	.week-list {
+		/* position: absolute;
+		display: block; */
+		width: 100%;
+		height: 100%;
+		
+	}
+	
+	.info-side{
+		height: 50vh;
+	}
+
+	.week-container {
+		box-sizing: border-box;
+		position: relative;
+		left: 0;
+		width: 100%;
+		display: block;
+	}
 }
