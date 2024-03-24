@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700,900&display=swap');
 
 :root {
-	--gradient: linear-gradient(135deg, #04a3ec 10%, #6d4a00 100%);
+	--gradient: linear-gradient(135deg, #a204ec 10%, #10006d 100%);
 }
 
 .clear {
@@ -47,7 +47,7 @@ body {
 	position: relative;
 	height: 100%;
 	border-radius: 25px;
-	background-image: url("bg.png");
+	background-image: url("bg.webp");
 	background-size: cover;
 	width: 300px;
 	box-shadow: 0 0 20px -10px rgba(0, 0, 0, 0.2);
