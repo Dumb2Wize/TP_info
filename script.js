@@ -1,4 +1,4 @@
-const apiKey = 'API_KEY';
+const apiKey = '9de34b06ddf5451e8f2200002242303';
 
 const today = new Date()
 
@@ -19,6 +19,7 @@ function getMonthName(date) {
 }
 
 async function getWeather(date, location) {
+
 
     document.querySelector(".date-dayname").innerHTML = `${getDayName(date)}`
     document.querySelector(".date-day").innerHTML = `${date.getDate()} ${getMonthName(date)} ${date.getFullYear()}`
@@ -50,7 +51,10 @@ async function getWeather(date, location) {
     }
     else {
 
+        
+
         // Formatez la date de demain pour qu'elle corresponde au format utilisé par l'API WeatherAPI (YYYY-MM-DD)
+        // date.setDate(date.getDate() + 1)
         const formattedDate = date.toISOString().split('T')[0];
         const apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&lang=${formatLan}&dt=${formattedDate}`;
         let xhr = new XMLHttpRequest()
@@ -60,13 +64,8 @@ async function getWeather(date, location) {
             if (xhr.status == 200) {
                 try {
 
-
-
                     let response = JSON.parse(xhr.response)
-
                     const precip_mm = response.forecast.forecastday[0].day.totalprecip_mm;
-
-
                     document.querySelector(".weather-temp").innerHTML = ` ${response.forecast.forecastday[0].day.avgtemp_c} °C`
                     document.querySelector(".weather-desc").innerHTML = `${response.forecast.forecastday[0].day.condition.text}`
                     document.querySelector(".precipitation .value").innerHTML = `${precip_mm} mm`
@@ -82,6 +81,7 @@ async function getWeather(date, location) {
                 console.log(xhr.status)
             }
         }
+        // date.setDate(date.getDate() - 1)
 
 
     }
@@ -98,7 +98,6 @@ async function getTempForDate(date, location, i = 0) {
     const formattedDate = `${year}-${month}-${day}`;
 
     const apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&dt=${formattedDate}`;
-    console.log(apiUrl);
     const result = await new Promise((resolve, reject) => {
         let xhr = new XMLHttpRequest()
         xhr.open('get', apiUrl, true)
@@ -145,10 +144,11 @@ function loadLocation(location) {
     weekList.forEach(dayOfWeek => {
         let timeStamp = Date.now() + (i * 1000 * 60 * 60 * 24)
         let currentDate = new Date(timeStamp)
-        console.log(currentDate)
         dayOfWeek.querySelector(".day-name").innerHTML = `${getDayName(currentDate)}`.substring(0, 3)
         displayTemperature(currentDate, dayOfWeek.querySelector(".day-temp"), location)
         displayTemperature(currentDate, dayOfWeek.querySelector("img"), location, 1)
+
+
 
         dayOfWeek.addEventListener("click", () => {
             document.querySelector(".active").classList.toggle("active")
@@ -157,6 +157,9 @@ function loadLocation(location) {
         })
         i++
     })
+    document.querySelectorAll(".week-list img, image-conditions-meteo").forEach(conditionImg =>{
+        conditionImg.setAttribute("title", "Condition meteo")
+        })
 }
 
 window.onload = loadLocation(currentLocation)
