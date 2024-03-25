@@ -211,8 +211,9 @@ body {
 @media screen and (max-width: 760px) {
 
 	body {
-		min-height: calc(100vh + 150px);
+		
 		overflow-y: auto;
+		min-height: calc(667px + 150px);
 	}
 
 	.main {
