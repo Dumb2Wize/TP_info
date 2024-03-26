@@ -5,6 +5,9 @@ const today = new Date()
 let weekList = document.querySelectorAll(".week-list .day-select")
 let formatLan = document.documentElement.lang || 'fr'
 let currentLocation
+
+let 
+
 if(localStorage.getItem("location"))
 {
     currentLocation = localStorage.getItem("location")
@@ -168,5 +171,7 @@ function loadLocation(location) {
         conditionImg.setAttribute("title", "Condition meteo")
         })
 }
+
+
 
 window.onload = loadLocation(currentLocation)

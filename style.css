@@ -40,7 +40,9 @@ body {
 .container {
 	border-radius: 25px;
 	color: #000;
+	background-color: rgb(164, 201, 255);
 	height: 380px;
+	box-shadow: 0 0 12px 7px rgba(0, 0, 0, 0.2);
 }
 
 .weather-side {
