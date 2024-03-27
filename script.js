@@ -6,7 +6,6 @@ let weekList = document.querySelectorAll(".week-list .day-select")
 let formatLan = document.documentElement.lang || 'fr'
 let currentLocation
 
-let 
 
 if(localStorage.getItem("location"))
 {
